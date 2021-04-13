@@ -33,7 +33,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new friendlyErrorsWebpackPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
     rules: [
