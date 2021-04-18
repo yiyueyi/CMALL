@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'antd/dist/antd.min.css'
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout } from 'antd';
 import MenuTop from 'components/LayoutComponents/MenuTop'
 import MenuLeft from 'components/LayoutComponents/MenuLeft'
 import Routes from 'routes';
+import './index.scss'
 
 const { Header, Content, Sider } = Layout;
 
@@ -17,7 +18,8 @@ class SiderLayout extends React.Component {
                     <MenuTop />
                 </Header>
                 <Layout>
-                    <Sider width={200} className="site-layout-background">
+                    <Sider width={123} 
+                           className="site-layout-background">
                         <MenuLeft />
                     </Sider>
                     <Layout style={{ padding: '0 24px 24px' }}>
