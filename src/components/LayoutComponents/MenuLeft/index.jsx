@@ -13,8 +13,9 @@ class MenuLeft extends Component {
         return (
             <div>
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-                    {ROUTER_MENU.map(({ title, key }) => {
-                        return <Menu.Item key={key}>
+                    {ROUTER_MENU.map(({ title, key, icon }) => {
+                        return <Menu.Item key={key}
+                                          icon={icon}>
                             <Link to={key}>
                                 {title}
                             </Link>

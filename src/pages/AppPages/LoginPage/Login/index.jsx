@@ -7,10 +7,6 @@ class Login extends Component {
         this.state = {}
     }
 
-    onLoginFinish = (values) => {
-        console.log('Success:', values);
-    };
-
     onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };

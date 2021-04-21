@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, InputNumber, Button } from 'antd';
+import RegisterServers from 'services/RegisterServers'
 
 class Register extends Component {
 
@@ -10,6 +11,14 @@ class Register extends Component {
 
     onFinish = (values) => {
         console.log(values);
+        RegisterServers.setRegisterServer({
+            userName: values.userName,
+            password: values.passWord,
+            nickName: values.nickName,
+            avatar: ''
+        }).then((res) => {
+            console.log(res);
+        });
     };
 
     render() {
@@ -27,7 +36,7 @@ class Register extends Component {
             <div>
                 <Form {...layout} name="nest-messages"
                     onFinish={this.onFinish}>
-                    <Form.Item name={['user', 'name']}
+                    <Form.Item name="nickName"
                         label="用户名"
                         rules={[
                             {
@@ -37,7 +46,7 @@ class Register extends Component {
                         ]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item name={['user', 'name']}
+                    <Form.Item name="userName"
                         label="账号"
                         rules={[
                             {

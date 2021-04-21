@@ -14,7 +14,7 @@ module.exports = {
   mode: 'development',
   resolve: {
     modules: [`${resolvePath('./node_modules')}`, `${resolvePath('./src')}`],
-    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
+    extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx', '.ts', '.tsx'],
   },
   devtool: 'inline-source-map',
   entry: {
@@ -47,7 +47,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(js|jsx|mjs)$/,
+        test: /\.(js|jsx|mjs|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -65,7 +65,7 @@ module.exports = {
         type: 'asset/inline',
       },
       {
-        test: /\.(scss|css)$/,
+        test: /\.(scss|css|less)$/,
         use: [
           'style-loader',
           {
@@ -91,8 +91,5 @@ module.exports = {
     hot: true,
     quiet: true,
     port: 8082,
-  },
-  devServer: {
-      hot: true
   }
 }

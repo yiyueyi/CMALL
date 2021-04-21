@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Home from 'pages/AppPages/HomePage';
-import RoutersMenu from 'constants/RoutersMenu.js'
+import RoutersMenu from 'constants/RoutersMenu'
 
 class Routes extends React.Component {
 
@@ -9,7 +9,7 @@ class Routes extends React.Component {
     render() {
         const ROUTER_MENU = RoutersMenu.ROUTER_MENU
         return (
-            <div className='routes_box'>
+            <div>
                 <Route exact path='/' component={Home} />
                 {Object.values(ROUTER_MENU).map(({ key }) => {
                     const { exact, ...props } = ROUTER_MENU[key];

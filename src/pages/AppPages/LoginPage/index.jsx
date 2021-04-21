@@ -7,22 +7,24 @@ import Register from './Register';
 const { TabPane } = Tabs;
 
 class LoginPage extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {}
     }
+
     render() {
 
         return (
             <div>
                 <Helmet title="登录" />
                 <Tabs defaultActiveKey="1" onChange={this.callback}>
-                    <TabPane style={{ width: '530px', height: '60vh' }}
+                    <TabPane style={{ width: '530px', minHeight: 300 }}
                              tab="登录"
                              key="1">
                         <Login />
                     </TabPane>
-                    <TabPane style={{ width: '530px', height: '60vh' }}
+                    <TabPane style={{ width: '530px', minHeight: 300 }}
                         tab="注册"
                         key="2">
                         <Register />
