@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, InputNumber, Button } from 'antd';
-import RegisterServers from 'services/RegisterServers'
+import { Form, Input, InputNumber, Button, message } from 'antd';
+import RegisterServers from 'services/RegisterServers';
+import AppConstants from 'constants/AppConstants';
 
 class Register extends Component {
 
@@ -10,14 +11,19 @@ class Register extends Component {
     }
 
     onFinish = (values) => {
-        console.log(values);
         RegisterServers.setRegisterServer({
             userName: values.userName,
             password: values.passWord,
             nickName: values.nickName,
             avatar: ''
         }).then((res) => {
-            console.log(res);
+            if(AppConstants.SERVE_STATYS_ERROR === res.code) {
+                message.error(res.message)
+            }
+            if(AppConstants.SERVE_STATYS_SUCCESS === res.code) {
+                message.success('注册成功')
+                history.push(RoutersMenu.ROUTER_MENU['/login'].key);
+            }
         });
     };
 
@@ -25,7 +31,7 @@ class Register extends Component {
 
         const layout = {
             labelCol: {
-                span: 8,
+                span: 5,
             },
             wrapperCol: {
                 span: 16,

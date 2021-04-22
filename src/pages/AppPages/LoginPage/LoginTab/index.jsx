@@ -1,14 +1,41 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'antd';
+import history from 'routerHistory';
+import { connect } from 'react-redux';
+import { Form, Input, Button, message } from 'antd';
+import { setUserToken } from 'ducks/user';
+import RegisterServers from 'services/RegisterServers';
+import RoutersMenu  from 'constants/RoutersMenu';
+import AppConstants from 'constants/AppConstants';
 
-class Login extends Component {
+const mapStateToProps = (res) => ({
+});
+const mapDispatchToProps = (dispatch) => ({
+    setUserToken: (state) => {
+        dispatch(setUserToken(state));
+    }
+});
+
+// @connect(mapStateToProps, mapDispatchToProps)
+class LoginTab extends Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
 
-    onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+    onLoginFinish = (values) => {
+        RegisterServers.setLoginServer({
+            userName: values.userName,
+            password: values.passWord,
+        }).then((res) => {
+            if(AppConstants.SERVE_STATYS_SUCCESS === res.code) {
+                console.log(res.token);
+                this.props.setUserToken(res.token);
+                message.success('登录成功');
+                history.push(RoutersMenu.ROUTER_MENU['/home'].key);
+            }else {
+                message.error(res.message)
+            }
+        });
     };
 
     render() {
@@ -33,10 +60,9 @@ class Login extends Component {
                     initialValues={{
                         remember: true,
                     }}
-                    onFinish={this.onLoginFinish}
-                    onFinishFailed={this.onFinishFailed}>
+                    onFinish={this.onLoginFinish}>
                     <Form.Item label="账号"
-                        name="账号"
+                        name="userName"
                         rules={[
                             {
                                 required: true,
@@ -66,4 +92,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps) (LoginTab);

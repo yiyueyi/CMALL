@@ -9,7 +9,7 @@ class Routes extends React.Component {
     render() {
         const ROUTER_MENU = RoutersMenu.ROUTER_MENU
         return (
-            <div>
+            <div style={{ minHeight: 360 }}>
                 <Route exact path='/' component={Home} />
                 {Object.values(ROUTER_MENU).map(({ key }) => {
                     const { exact, ...props } = ROUTER_MENU[key];

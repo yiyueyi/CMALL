@@ -13,7 +13,7 @@ const loadable = (loader, param) =>
 const ROUTER_MENU = {
   // 首页
   '/home': {
-    title: '首页1111111',
+    title: '首页',
     route: 'pages/AppPages/HomePage',
     key: '/home',
     icon: <LaptopOutlined />,

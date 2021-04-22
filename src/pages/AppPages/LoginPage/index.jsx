@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { Tabs } from 'antd';
-import Login from './Login';
+import LoginTab from './LoginTab';
 import Register from './Register';
 
 const { TabPane } = Tabs;
@@ -22,7 +22,7 @@ class LoginPage extends Component {
                     <TabPane style={{ width: '530px', minHeight: 300 }}
                              tab="登录"
                              key="1">
-                        <Login />
+                        <LoginTab />
                     </TabPane>
                     <TabPane style={{ width: '530px', minHeight: 300 }}
                         tab="注册"

@@ -1,11 +1,22 @@
 import React,{Component} from 'react';
-import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 
+const mapStateToProps = (res) => ({
+    res: res
+});
 class HomePage extends Component {
+
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+            res: props.res
+         }
     }
+
+    componentDidMount() {
+        console.log(this.state.res);
+    }
+
     render() { 
         return ( 
             <div>
@@ -15,4 +26,4 @@ class HomePage extends Component {
     }
 }
  
-export default HomePage;
+export default connect(mapStateToProps) (HomePage);
