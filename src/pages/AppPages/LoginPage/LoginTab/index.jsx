@@ -28,7 +28,6 @@ class LoginTab extends Component {
             password: values.passWord,
         }).then((res) => {
             if(AppConstants.SERVE_STATYS_SUCCESS === res.code) {
-                console.log(res.token);
                 this.props.setUserToken(res.token);
                 message.success('登录成功');
                 history.push(RoutersMenu.ROUTER_MENU['/home'].key);

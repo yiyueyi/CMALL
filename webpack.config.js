@@ -90,6 +90,6 @@ module.exports = {
     open: false,
     hot: true,
     quiet: true,
-    port: 8082,
+    port: 8080,
   }
 }

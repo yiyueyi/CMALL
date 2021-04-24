@@ -27,6 +27,14 @@ const ROUTER_MENU = {
     icon: <UserOutlined />,
     component: loadable(() => import('pages/AppPages/LoginPage')),
   },
+  //用户列表
+  '/userList': {
+    title: '用户列表',
+    route: 'pages/DefaultPages/UserList',
+    key: '/userList',
+    icon: <NotificationOutlined />,
+    component: loadable(() => import('pages/AppPages/UserList')),
+  },
   // 重定向
   '/404': {
     title: '404',

@@ -9,12 +9,8 @@ class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            res: props.res
+            res: props.res//测试数据
          }
-    }
-
-    componentDidMount() {
-        console.log(this.state.res);
     }
 
     render() { 

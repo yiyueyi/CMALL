@@ -17,13 +17,9 @@ const initState = {
 export default createReducer(
     {
         [setUserToken]: (state, param) => {
-            console.log(state);
-            console.log(param);
             const userToekn = { ...state.userToekn, param };
-            console.log(userToekn);
             const newState = { ...state, userToekn };
-            console.log(newState);
-            window.localStorage.setItem(LocalStorageConstants.USER__TOKEN, JSON.stringify(newState.userToekn));
+            window.localStorage.setItem(LocalStorageConstants.USER__TOKEN, JSON.stringify(param));
             return newState;
         }
     },

@@ -8,9 +8,13 @@ const setToken = (token) => {
 };
 
 const getToken = () => {
-    return Token.getToken();
+    const toekenState = JSON.parse(Token.getToken())
+    return toekenState;
 };
 
+const tokenState = `Bearer ${getToken()}`
+
+//不带token  登录使用
 const executeRegister = async (method, params) => {
     return new Promise((resolve, reject) => {
         const url = AppConstants.API_GATEWAY_URL + method;
@@ -26,12 +30,14 @@ const executeRegister = async (method, params) => {
     });
 };
 
+
+//带有token
 const executePost = async (method, params) => {
     return new Promise((resolve, reject) => {
         const url = AppConstants.API_GATEWAY_URL + method;
         axios.post(url, params, {
             headers: {
-                token: getToken(),
+                authorization: tokenState,
             }
         }).then(resp => {
             resolve(resp.data);
@@ -44,9 +50,14 @@ const executePost = async (method, params) => {
     });
 };
 
-const doGet = async (url) => {
+const executeGet = async (method) => {
     return await new Promise((resolve) => {
-        axios.get(url).then(resp => {
+        const url = AppConstants.API_GATEWAY_URL + method;
+        axios.get(url, {
+            headers: {
+                authorization: tokenState,
+            }
+        }).then(resp => {
             resolve(resp.data);
         }).catch(error => {
             console.log(error.message);
@@ -54,4 +65,4 @@ const doGet = async (url) => {
     });
 };
 
-export default { setToken, executeRegister, doGet, getToken, executePost };
+export default { setToken, executeRegister, executeGet, getToken, executePost };
