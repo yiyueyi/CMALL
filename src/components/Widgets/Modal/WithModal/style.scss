@@ -1,0 +1,12 @@
+.ant-modal-wrap {
+    &.no-header {
+        .ant-modal-header {
+            display: none;
+        }
+    }
+    &.close-disabled {
+        .ant-modal-close-x {
+            display: none;
+        }
+    }
+}

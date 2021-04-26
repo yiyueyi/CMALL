@@ -1,29 +1,34 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import RegisterServers from 'services/RegisterServers';
+import Modal from 'components/Widgets/Modal/WithModal';
 import AppConstants from 'constants/AppConstants';
-import RoutersMenu from 'constants/RoutersMenu'
 
-class Register extends Component {
+class AddUserModol extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.props.getInstance(this);
+        this.state = {
+
+        }
     }
 
     onFinish = (values) => {
+        const { onReload } = this.props
         RegisterServers.setRegisterServer({
             userName: values.userName,
             password: values.passWord,
             nickName: values.nickName,
             avatar: ''
         }).then((res) => {
-            if(AppConstants.SERVE_STATYS_ERROR === res.code) {
+            if (AppConstants.SERVE_STATYS_ERROR === res.code) {
                 message.error(res.message)
             }
-            if(AppConstants.SERVE_STATYS_SUCCESS === res.code) {
-                message.success('注册成功')
-                history.push(RoutersMenu.ROUTER_MENU['/login'].key);
+            if (AppConstants.SERVE_STATYS_SUCCESS === res.code) {
+                message.success('添加成功');
+                this.props.closeModal();
+                onReload()
             }
         });
     };
@@ -32,10 +37,10 @@ class Register extends Component {
 
         const layout = {
             labelCol: {
-                span: 5,
+                span: 8,
             },
             wrapperCol: {
-                span: 16,
+                span: 32,
             },
         };
 
@@ -87,7 +92,7 @@ class Register extends Component {
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                         <Button type="primary"
                             htmlType="submit">
-                            点击注册
+                            点击添加
                         </Button>
                     </Form.Item>
                 </Form>
@@ -96,4 +101,4 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default Modal({ title: '添加用户', width: 400, maskClosable: false, footer: null, modalProps: { centered: true } })(AddUserModol);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserListTab from './UserListTab';
+import UserListPanel from './UserListPanel';
 
 
 class AllUserStatus extends Component {
@@ -11,11 +12,16 @@ class AllUserStatus extends Component {
         }
     }
 
+    onReload = () => {
+        this.userListTab.loadRecords()
+    }
+
     render() {
 
         return (
             <div>
-                <UserListTab/>
+                <UserListPanel onReload={this.onReload}/>
+                <UserListTab ref={ref => this.userListTab = ref}/>
             </div>
         );
     }

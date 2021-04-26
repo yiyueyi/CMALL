@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import axios from 'axios';
 import { message } from 'antd';
 import Token from 'stores/Token';
@@ -50,17 +51,22 @@ const executePost = async (method, params) => {
     });
 };
 
-const executeGet = async (method) => {
+const executeGet = async (method, params) => {
     return await new Promise((resolve) => {
+        console.log(params);
         const url = AppConstants.API_GATEWAY_URL + method;
         axios.get(url, {
             headers: {
                 authorization: tokenState,
-            }
+            },
+            params: params
         }).then(resp => {
             resolve(resp.data);
         }).catch(error => {
-            console.log(error.message);
+            console.log(error);
+            if(500===error.code) {
+                message.error('服务器开小差了，请稍后重试');
+            }
         });
     });
 };
