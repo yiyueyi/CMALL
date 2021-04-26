@@ -30,10 +30,18 @@ const ROUTER_MENU = {
   //用户列表
   '/userList': {
     title: '用户列表',
-    route: 'pages/DefaultPages/UserList',
+    route: 'pages/AppPages/UserList',
     key: '/userList',
     icon: <NotificationOutlined />,
     component: loadable(() => import('pages/AppPages/UserList')),
+  },
+  //商品列表
+  '/products': {
+    title: '商品列表',
+    route: 'pages/AppPages/products',
+    key: '/products',
+    icon: <NotificationOutlined />,
+    component: loadable(() => import('pages/AppPages/ProductsPage')),
   },
   // 重定向
   '/404': {
