@@ -3,6 +3,7 @@ import { Form, Input, Button, message } from 'antd';
 import RegisterServers from 'services/RegisterServers';
 import Modal from 'components/Widgets/Modal/WithModal';
 import AppConstants from 'constants/AppConstants';
+import UploadImg from './UploadImg';
 
 class AddUserModol extends Component {
 
@@ -10,17 +11,18 @@ class AddUserModol extends Component {
         super(props);
         this.props.getInstance(this);
         this.state = {
-
+            imgUrl:''
         }
     }
 
     onFinish = (values) => {
         const { onReload } = this.props
+        const { imgUrl } = this.state
         RegisterServers.setRegisterServer({
             userName: values.userName,
             password: values.passWord,
             nickName: values.nickName,
-            avatar: ''
+            avatar: imgUrl
         }).then((res) => {
             if (AppConstants.SERVE_STATYS_ERROR === res.code) {
                 message.error(res.message)
@@ -32,6 +34,10 @@ class AddUserModol extends Component {
             }
         });
     };
+
+    onUserImgUrl = (imgUrl) => {
+        this.setState({imgUrl: `${AppConstants.API_GATEWAY_URL}${imgUrl.slice(1)}`})
+    }
 
     render() {
 
@@ -46,6 +52,7 @@ class AddUserModol extends Component {
 
         return (
             <div>
+                <UploadImg onUserImgUrl={this.onUserImgUrl}/>
                 <Form {...layout} name="nest-messages"
                     onFinish={this.onFinish}>
                     <Form.Item name="nickName"

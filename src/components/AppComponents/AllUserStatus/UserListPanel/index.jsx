@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Radio } from 'antd';
+import { Button } from 'antd';
 import AddUserModol from './AddUserModol';
+import './style.scss'
 
 class UserListPanel extends Component {
     
@@ -20,7 +21,7 @@ class UserListPanel extends Component {
         const { onReload } = this.props
 
         return (
-            <div>
+            <div className='mb_3'>
                 <Button onClick={this.handleAddUser}>
                     添加新用户
                 </Button>

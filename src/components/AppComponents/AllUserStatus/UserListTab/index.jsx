@@ -15,6 +15,7 @@ class UserListTab extends Component {
             columns: getColumns(this),
             records: null,
             pagination: {},
+            selectedRowKeys: [],
             loading: false,
         }
     }
@@ -47,6 +48,15 @@ class UserListTab extends Component {
 
     render() {
         const { records, columns, pagination, loading } = this.state;
+        const rowSelection = {
+            onChange: (selectedRowKeys,item) => {
+                this.setState({
+                    selectedRowKeys: selectedRowKeys
+                },()=> {
+                    console.log(item);
+                });
+            }
+        };
         return (
             <div>
                 <Table rowKey='_id'
@@ -54,6 +64,7 @@ class UserListTab extends Component {
                        loading={loading}
                        dataSource={records} 
                        columns={columns}
+                       rowSelection={rowSelection}
                        pagination={TableUtils.showPaginationOptions(pagination)}
                     //    scroll={{ y: 760 }}
                        onChange={TableUtils.handleTableChange(this.loadRecords)}/>
