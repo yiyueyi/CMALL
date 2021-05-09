@@ -74,13 +74,16 @@ const getColumns = that => {
             render: (_id) => <div>
                 <Button block
                         size="small">
-                    查看详情
+                    获取用户收货地址
                 </Button>
                 <br/>
                 <br/>
                 <Button block
+                        type='primary'
+                        danger
+                        onClick={() => that.handleDelUserState(_id)}
                         size="small">
-                    删除
+                    一键删除
                 </Button>
             </div>,
             width: '15%'

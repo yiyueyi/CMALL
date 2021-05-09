@@ -86,16 +86,6 @@ class AddUserModol extends Component {
                         ]}>
                         <Input.Password />
                     </Form.Item>
-                    <Form.Item label="请再次输入密码"
-                        name="RepeatPassWord"
-                        rules={[
-                            {
-                                required: true,
-                                message: '请再次输入密码!',
-                            },
-                        ]}>
-                        <Input.Password />
-                    </Form.Item>
                     <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                         <Button type="primary"
                             htmlType="submit">

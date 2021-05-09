@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
+import { Table, message } from 'antd';
 import InformationServer from 'services/InformationServer';
+import LangUtils from 'utils/LangUtils';
 import TableUtils from 'utils/TableUtils';
 import getColumns from './columns';
 
@@ -8,7 +9,7 @@ const PAGE_NO = 1;
 const PAGE_SIZE = 10;
 
 class UserListTab extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -32,13 +33,13 @@ class UserListTab extends Component {
             page: pageNo,//当前页面默认1
             userName: '',//用户名
             nickName: ''//昵称
-        }).then(({pages, totalCount, users}) => {
+        }).then(({ pages, totalCount, users }) => {
             pagination = _.assign({}, pagination, {
                 pageNo: pages,//第几页
                 pageSize: pageSize,//一页多少个
                 total: totalCount//总条数
             });
-            this.setState({ 
+            this.setState({
                 loading: false,
                 records: users,
                 pagination: pagination,
@@ -46,28 +47,41 @@ class UserListTab extends Component {
         })
     };
 
+    handleDelUserState = (id) => {
+        InformationServer.delUserState(id).then((res) => {
+            if(LangUtils.isNil(res)) {
+                message.error('删除失败')
+                this.loadRecords();
+            }else {
+                message.success('删除成功')
+                this.loadRecords();
+            }
+        })
+    }
+
     render() {
+        const { onUserIds } = this.props;
         const { records, columns, pagination, loading } = this.state;
         const rowSelection = {
-            onChange: (selectedRowKeys,item) => {
+            onChange: (selectedRowKeys, item) => {
                 this.setState({
                     selectedRowKeys: selectedRowKeys
-                },()=> {
-                    console.log(item);
+                }, () => {
+                    onUserIds(this.state.selectedRowKeys);
                 });
             }
         };
         return (
             <div>
                 <Table rowKey='_id'
-                       bordered
-                       loading={loading}
-                       dataSource={records} 
-                       columns={columns}
-                       rowSelection={rowSelection}
-                       pagination={TableUtils.showPaginationOptions(pagination)}
+                    bordered
+                    loading={loading}
+                    dataSource={records}
+                    columns={columns}
+                    rowSelection={rowSelection}
+                    pagination={TableUtils.showPaginationOptions(pagination)}
                     //    scroll={{ y: 760 }}
-                       onChange={TableUtils.handleTableChange(this.loadRecords)}/>
+                    onChange={TableUtils.handleTableChange(this.loadRecords)} />
             </div>
         );
     }

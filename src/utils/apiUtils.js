@@ -53,7 +53,6 @@ const executePost = async (method, params) => {
 
 const executeGet = async (method, params) => {
     return await new Promise((resolve) => {
-        console.log(params);
         const url = AppConstants.API_GATEWAY_URL + method;
         axios.get(url, {
             headers: {
@@ -71,4 +70,22 @@ const executeGet = async (method, params) => {
     });
 };
 
-export default { setToken, executeRegister, executeGet, getToken, executePost };
+const executeDel = async (method) => {
+    return await new Promise((resolve) => {
+        const url = AppConstants.API_GATEWAY_URL + method;
+        axios.delete(url, {
+            headers: {
+                authorization: tokenState,
+            }
+        }).then(resp => {
+            resolve(resp.data);
+        }).catch(error => {
+            console.log(error);
+            if(500===error.code) {
+                message.error('服务器开小差了，请稍后重试');
+            }
+        });
+    });
+};
+
+export default { setToken, executeRegister, executeGet, getToken, executePost, executeDel };

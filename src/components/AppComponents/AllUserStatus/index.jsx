@@ -4,11 +4,11 @@ import UserListPanel from './UserListPanel';
 
 
 class AllUserStatus extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
-            
+            ids: [],
         }
     }
 
@@ -16,12 +16,23 @@ class AllUserStatus extends Component {
         this.userListTab.loadRecords()
     }
 
-    render() {
+    onUserIds = (ids) => {
+        this.setState({ ids: ids })
+    }
 
+    onDelId = (id) => {
+        this.userListTab.handleDelUserState(id)
+    }
+
+    render() {
+        const { ids } = this.state;
         return (
             <div>
-                <UserListPanel onReload={this.onReload}/>
-                <UserListTab ref={ref => this.userListTab = ref}/>
+                <UserListPanel onReload={this.onReload}
+                               onDelId={this.onDelId}
+                               ids={ids} />
+                <UserListTab ref={ref => this.userListTab = ref}
+                             onUserIds={this.onUserIds} />
             </div>
         );
     }
