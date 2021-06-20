@@ -73,8 +73,9 @@ const getColumns = that => {
             align: 'center',
             render: (_id) => <div>
                 <Button block
+                        onClick={() => that.handleInformation(_id)}
                         size="small">
-                    获取用户收货地址
+                    查看详情
                 </Button>
                 <br/>
                 <br/>

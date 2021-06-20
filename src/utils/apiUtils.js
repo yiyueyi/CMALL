@@ -16,6 +16,7 @@ const getToken = () => {
 const tokenState = `Bearer ${getToken()}`
 
 //不带token  登录使用
+//post 
 const executeRegister = async (method, params) => {
     return new Promise((resolve, reject) => {
         const url = AppConstants.API_GATEWAY_URL + method;
@@ -33,6 +34,7 @@ const executeRegister = async (method, params) => {
 
 
 //带有token
+//post token
 const executePost = async (method, params) => {
     return new Promise((resolve, reject) => {
         const url = AppConstants.API_GATEWAY_URL + method;
@@ -51,6 +53,7 @@ const executePost = async (method, params) => {
     });
 };
 
+//get token
 const executeGet = async (method, params) => {
     return await new Promise((resolve) => {
         const url = AppConstants.API_GATEWAY_URL + method;
@@ -70,6 +73,7 @@ const executeGet = async (method, params) => {
     });
 };
 
+//delete token
 const executeDel = async (method) => {
     return await new Promise((resolve) => {
         const url = AppConstants.API_GATEWAY_URL + method;

@@ -3,6 +3,7 @@ import { Table, message } from 'antd';
 import InformationServer from 'services/InformationServer';
 import LangUtils from 'utils/LangUtils';
 import TableUtils from 'utils/TableUtils';
+import ModifyUserInformationModul from './ModifyUserInformationModul';
 import getColumns from './columns';
 
 const PAGE_NO = 1;
@@ -16,6 +17,7 @@ class UserListTab extends Component {
             columns: getColumns(this),
             records: null,
             pagination: {},
+            onPersonalInformation: {},
             selectedRowKeys: [],
             loading: false,
         }
@@ -46,7 +48,7 @@ class UserListTab extends Component {
             })
         })
     };
-
+    
     handleDelUserState = (id) => {
         InformationServer.delUserState(id).then((res) => {
             if(LangUtils.isNil(res)) {
@@ -59,11 +61,19 @@ class UserListTab extends Component {
         })
     }
 
+    handleInformation = (id) => {
+        InformationServer.getSomeUserData(id).then((res) => {
+            this.setState({onPersonalInformation: res}, ()=> {
+                this.modifyUserInformationModul.show()
+            })
+        })
+    }
+
     render() {
         const { onUserIds } = this.props;
-        const { records, columns, pagination, loading } = this.state;
+        const { records, columns, pagination, loading, onPersonalInformation } = this.state;
         const rowSelection = {
-            onChange: (selectedRowKeys, item) => {
+            onChange: (selectedRowKeys) => {
                 this.setState({
                     selectedRowKeys: selectedRowKeys
                 }, () => {
@@ -82,6 +92,8 @@ class UserListTab extends Component {
                     pagination={TableUtils.showPaginationOptions(pagination)}
                     //    scroll={{ y: 760 }}
                     onChange={TableUtils.handleTableChange(this.loadRecords)} />
+                <ModifyUserInformationModul ref={ref => this.modifyUserInformationModul = ref}
+                                            onPersonalInformation={onPersonalInformation}/>
             </div>
         );
     }

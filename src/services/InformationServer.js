@@ -21,8 +21,16 @@ const setAdminUsers = (params) => {
     return ApiUtils.executeDel(`api/v1/admin/users/${params}`);
 };
 
+/**
+ * 获取指定用户的信息
+ */
+ const getSomeUserData = (params) => {
+    return ApiUtils.executeGet(`api/v1/admin/users/${params}`);
+};
+
 export default {
     setAdminUsers,
     setAdminProducts,
     delUserState,
+    getSomeUserData,
 };
